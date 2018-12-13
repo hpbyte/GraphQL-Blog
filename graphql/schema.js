@@ -6,6 +6,7 @@ const schema = buildSchema(`
 		post(id: ID!): Post!
 		tags: [Tag!]!
 		tag(id: ID!): Tag!
+		comments(postId: ID!): [Comment]!
 	}
 
 	type Post {
@@ -14,13 +15,13 @@ const schema = buildSchema(`
 		body: String!
 		comments: [Comment!]!
 		tags: [Tag!]!
-		owner: ID!
+		owner: User!
 	}
 
 	type Comment {
 		id: ID!
-		body: String!
-		owner: ID!
+		comment: String!
+		owner: User!
 	}
 
 	type Tag {
@@ -31,7 +32,20 @@ const schema = buildSchema(`
 	type User {
 		id: ID!
 		name: String
+		about: String
 		email: String
+	}
+
+	type Mutation {
+		addPost(title: String!, body: String!): Post!
+		updatePost(id: ID!, title: String, body: String): Post!
+		deletePost(id: ID!): Post!
+		addPostTag(postId: ID!, tagId: ID!): Post!
+		removePostTag(postId: ID!, tagId: ID!): Post!
+		addComment(postId: ID!, comment: String!): Post!
+		updateComment(postId: ID!, comId: ID!, comment: String!): Post!
+		deleteComment(postId: ID!, comId: ID!): Post!
+		createTag(tag: String!): Tag!
 	}
 `);
 

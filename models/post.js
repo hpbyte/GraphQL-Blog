@@ -27,7 +27,7 @@ const postSchema = new Schema({
 		ref: 'Tag'
 	}],
 	owner: {
-		type: mongoose.Schema.Types.ObjectId,
+		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}
 });
